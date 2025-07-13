@@ -1,0 +1,78 @@
+Project Folder Structure
+
+├── src\                   # Source code directory
+│   ├── app\               # Entry point and main Application class
+│   │   └── InstallerApp.java
+│   ├── panes\             # JavaFX UI panels used in the installer wizard
+│   │   ├── IntroductionPane.java
+│   │   ├── LicensePane.java
+│   │   ├── DirectoryPane.java
+│   │   ├── SummaryPane.java
+│   │   ├── InstallPane.java
+│   │   └── FinishPane.java
+│   └── util\              # Utility classes for helper functions (e.g., unzip)
+│       └── InstallerUtils.java
+│
+├── resources\             # Extra files/resources to embed in JAR
+│   └── archive.zip
+│
+├── out\                   # (🛠️ Generated) Compiled .class files (created by compile.bat)
+│   └── app\
+│   └── panes\
+│   └── util\
+│
+├── runtime\               # (🛠️ Generated) Custom Java runtime (created by generate_runtime.bat)
+│   └── bin\ ...
+│
+├── installer.jar          # (🛠️ Generated) Bundled JAR file (created by create_jar.bat)
+│
+├── MyInstaller-1.0.msi    # (🛠️ Generated) Native Windows installer (created by build_msi.bat)
+│
+├── *.bat                  # Build and run scripts
+│   ├── compile.bat
+│   ├── create_jar.bat
+│   ├── generate_runtime.bat
+│   ├── test_jar_installer.bat
+│   ├── build_msi.bat
+│   └── clean_up.bat
+│
+├── error.log              # (🛠️ Optional) Runtime log if errors occur in GUI launch
+
+
+-----------------------------------------------------
+batch scripts: for more details refer script_notes.txt
+------------------------------------------------------
+1. clean_up.bat        (optional, to start fresh)
+2. compile.bat
+3. create_jar.bat
+4. generate_runtime.bat
+5. test_jar_installer.bat (optional for verification)
+6. build_msi.bat
+
+------------------------------------------------------
+Steps for building a self-contained JavaFX-based installer application using .bat scripts.
+
+1. generate_runtime.bat
+Purpose: Creates a custom Java runtime using jlink, including JavaFX modules.
+Why: This runtime ensures the final installer doesn't depend on any system-installed Java.
+Output: runtime/ folder containing a minimal JVM with JavaFX support.
+
+2. compile.bat
+Purpose: Compiles all Java source files into .class files.
+Why: Required to build the executable JAR in the next step.
+Output: out/ directory containing compiled class files.
+
+3. create_jar.bat
+Purpose: Packages the compiled files and archive.zip into a runnable installer.jar.
+Why: This is the core installer logic used by both testing and packaging.
+Output: installer.jar – a runnable JavaFX JAR file.
+
+3.1. test_jar_installer.bat (Optional but recommended)
+Purpose: Runs installer.jar to validate the UI and functionality before packaging.
+Why: Helps catch runtime or UI issues early.
+Note: Ensure JavaFX is correctly referenced in this test run.
+
+4. build_msi.bat
+Purpose: Uses jpackage to create a native .msi Windows installer.
+Why: Generates a professional, double-clickable installer with start menu and desktop shortcuts.
+Output: MyInstaller-1.0.msi – a distributable Windows installer.

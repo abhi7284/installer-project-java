@@ -1,0 +1,79 @@
+ Tools and Requirements
+This section lists all the tools and dependencies needed to build and package the JavaFX-based installer application.
+
+✅ 1. Java Development Kit (JDK 17 or above)
+Purpose: Required to compile and run JavaFX applications.
+
+Recommended Version: JDK 17 or higher.
+
+Download:
+https://adoptium.net/en-GB/temurin/releases/
+
+✔️ Configuration
+Add JDKs bin folder to your system PATH.
+
+Set JAVA_HOME environment variable to the JDK path.
+
+sh
+Copy
+Edit
+Example:
+JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-17
+✅ 2. JavaFX SDK (e.g., 24.0.1)
+Purpose: JavaFX libraries required for building and running UI applications.
+
+Download:
+https://gluonhq.com/products/javafx/
+
+✔️ Configuration
+Extract the SDK (e.g., C:\tools\javafx-sdk-24.0.1)
+
+Use the lib/ directory with:
+
+--module-path in compile/run scripts
+
+--add-modules javafx.controls
+
+✅ 3. WiX Toolset (v3.0 or later)
+Purpose: Required by jpackage to build .msi Windows installers.
+
+Download:
+https://wixtoolset.org/releases/
+
+✔️ Configuration
+Install WiX Toolset.
+
+Add the path of candle.exe and light.exe (usually in C:\Program Files (x86)\WiX Toolset v3.x\bin) to the system PATH.
+
+sh
+Copy
+Edit
+Example:
+PATH=C:\Program Files (x86)\WiX Toolset v3.11\bin;%PATH%
+✅ 4. Command Line Tools
+javac – For compiling Java source files
+
+jar – For creating executable JARs
+
+jlink – For generating a custom runtime image
+
+jpackage – For creating the native .msi installer
+
+✅ All of these are included in JDK 14+
+⚠️ Ensure you are running the command prompt as Administrator if permission issues arise while creating .msi
+
+✅ Optional: Editors and IDEs
+IDE: IntelliJ IDEA, Eclipse, or VS Code (with Java extension)
+
+Text Editor: Notepad++, Sublime, or VS Code
+
+Build Tool (optional): Maven or Gradle can be used for dependency management (not required for current setup)
+
+🧩 Required System Configuration
+Component	Required
+OS	Windows 10 or later
+Architecture	x64 (for .msi builds)
+Admin Rights	Required for .msi install test
+Java	JDK 17 or higher
+JavaFX	JavaFX SDK (matching JDK version)
+WiX Toolset	v3.0 or later

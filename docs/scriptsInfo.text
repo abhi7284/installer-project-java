@@ -1,0 +1,79 @@
+1. clean_up.bat        (optional, to start fresh)
+2. compile.bat
+3. create_jar.bat
+4. generate_runtime.bat
+5. test_jar_installer.bat (optional for verification)
+6. build_msi.bat
+
+Batch Scripts:
+1. generate_runtime.bat
+Purpose: Generates a custom Java runtime using jlink, which includes only necessary modules (e.g. JavaFX).
+
+Usage:
+Run this after compiling your code. It creates a runtime/ folder that will be bundled into the final installer.
+This ensures the installer does not depend on system-installed Java.
+
+Command Used:
+jlink --module-path "%JAVA_HOME%\jmods;C:\tools\javafx-sdk-24.0.1\lib" ^
+      --add-modules java.base,javafx.controls ^
+      --output runtime
+
+
+2. compile.bat
+Purpose: Compiles all Java source files from the src/ directory.
+
+Usage:
+Run this to generate .class files into the out/ directory.
+Make sure the JavaFX SDK path is correctly set.
+
+Command Used:
+javac --module-path C:\tools\javafx-sdk-24.0.1\lib --add-modules javafx.controls -d out src\app\InstallerApp.java src\panes\*.java src\util\InstallerUtils.java
+
+
+3. create_jar.bat
+Purpose: Packages the compiled .class files and archive.zip into a runnable installer.jar.
+
+Usage:
+Run this after compiling. It builds a JAR that can be executed with java -jar.
+
+Command Used:
+jar cfe installer.jar app.InstallerApp -C out . -C resources archive.zip
+
+
+4. test_jar_installer.bat
+Purpose: Runs the installer.jar using JavaFX runtime.
+
+Usage:
+Use this to test the JAR before creating the .msi installer.
+
+Command Used:
+java --module-path C:\tools\javafx-sdk-24.0.1\lib --add-modules javafx.controls -jar installer.jar
+
+
+5. build_msi.bat
+Purpose: Creates a native Windows .msi installer using jpackage.
+
+Usage:
+Run this after generating the runtime/ and installer.jar.
+The final .msi can be used for easy installation with desktop/start menu shortcuts.
+
+Command Used:
+jpackage --type msi --name MyInstaller ^
+  --input . ^
+  --main-jar installer.jar ^
+  --main-class app.InstallerApp ^
+  --runtime-image runtime ^
+  --win-menu ^
+  --win-shortcut ^
+  --icon app.ico
+🔧 Additional Optional Scripts
+
+
+6. clean_up.bat
+Purpose: Cleans up all build artifacts.
+
+Usage:
+Use this to remove out/, installer.jar, runtime/, .msi files, and error.log.
+
+Removes:
+out/, installer.jar, runtime/, *.msi, error.log
