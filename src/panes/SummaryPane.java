@@ -11,8 +11,16 @@ public class SummaryPane extends VBox {
         Button install = new Button("Install");
         install.setOnAction(e -> app.showInstall());
 
-        setSpacing(20);
-        setAlignment(Pos.CENTER);
-        getChildren().addAll(summary, install);
+        Button back = new Button("Back");
+        back.setOnAction(e -> app.showDirectory());
+
+        HBox buttonBox = new HBox(10, back, install);
+        buttonBox.setAlignment(Pos.CENTER_LEFT);
+
+        // setSpacing(20);
+        // setAlignment(Pos.CENTER);
+        setSpacing(10);
+        setPadding(new Insets(10));
+        getChildren().addAll(summary, buttonBox);
     }
 }

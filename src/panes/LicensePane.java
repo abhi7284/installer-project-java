@@ -19,8 +19,14 @@ public class LicensePane extends VBox {
 
         next.setOnAction(e -> app.showDirectory());
 
+        Button back = new Button("Back");
+        back.setOnAction(e -> app.showIntroduction());
+
+        HBox buttonBox = new HBox(10, back, next);
+        buttonBox.setAlignment(Pos.CENTER_LEFT);
+
         setSpacing(10);
         setPadding(new Insets(10));
-        getChildren().addAll(title, licenseText, agree, next);
+        getChildren().addAll(title, licenseText, agree, buttonBox);
     }
 }

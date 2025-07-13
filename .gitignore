@@ -3,3 +3,4 @@ out
 runtime
 lib
 installer.jar
+*.msi

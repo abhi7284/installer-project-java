@@ -30,8 +30,14 @@ public class DirectoryPane extends VBox {
             app.showSummary();
         });
 
+        Button back = new Button("Back");
+        back.setOnAction(e -> app.showLicense());
+
+        HBox buttonBox = new HBox(10, back, next);
+        buttonBox.setAlignment(Pos.CENTER_LEFT);
+
         setSpacing(10);
         setPadding(new Insets(10));
-        getChildren().addAll(label, pathField, browse, next);
+        getChildren().addAll(label, pathField, browse, buttonBox);
     }
 }
