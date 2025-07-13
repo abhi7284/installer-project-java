@@ -9,15 +9,13 @@ echo compiling codebase...
 call compile.bat
 echo compilation completed
 
-
-echo creating .jar file
+echo creating .jar file...
 call create_jar.bat
 echo .jar file created
-
 
 echo building msi installer...
 call build_msi.bat
 echo building msi completed
 
 echo All tasks completed.
-pause
+@REM pause

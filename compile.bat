@@ -22,4 +22,4 @@ IF %ERRORLEVEL% NEQ 0 (
     echo Compilation successful.
 )
 
-pause
+@REM pause
