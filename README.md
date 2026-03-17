@@ -86,7 +86,7 @@ Install WiX Toolset v3+
 Add candle.exe and light.exe to PATH
 ```PATH=C:\Program Files (x86)\WiX Toolset v3.11\bin;%PATH%```
 
-##🚀 Build & Packaging Process
+# 🚀 Build & Packaging Process
 ## Step 1 — (Optional) Clean Previous Builds
 
 ```clean_up.bat```
